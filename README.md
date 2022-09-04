@@ -36,4 +36,4 @@
 - 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。
 - 使用しない場合は、使用素材の項目をREADMEから削除してください。
 
-<API(TMDB：https://www.themoviedb.org)で取得した情報・画像を利用する>
+<API(TMDB：https://www.themoviedb.org) で取得した情報・画像を利用する>
