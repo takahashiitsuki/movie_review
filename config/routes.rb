@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   
   root to: "user/homes#top"
+  
+  get 'movies/search' => "movies#search"
 
-  get 'movies/show'
+  get 'movies/show' => "movies#show"
+  
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
