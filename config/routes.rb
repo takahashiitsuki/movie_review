@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  root to: "public/homes#top"
+  root to: "user/homes#top"
 
   get 'movies/show'
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
