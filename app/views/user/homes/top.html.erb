@@ -5,10 +5,9 @@
 
       <div class="example">
           <p>
-            <br>ようこそ、ながのCAKEへ！
-            <br>このサイトは、ケーキ販売のECサイトになります。
-            <br>会員でない方も商品の閲覧はできますが、
-            <br>購入には会員登録が必要になります。
+            <div class="row">
+          <%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, class: "btn btn-secondary btn-sm btn-block mb-3 sign_in", method: :post %>
+        </div>
           </p>
       </div>
     </div>
