@@ -1,0 +1,50 @@
+<div class="container col-lg-9">
+  <h3><div class="d-inline mt-5 px-4 bg-light text-dark">
+    マイページ編集
+  </div></h3>
+</div>
+<br>
+
+<%= form_with model: @user, url:  '/users', method: :patch do |f| %>
+<div class="container col-lg-10 mb-5">
+  <table class="table table-borderless">
+    <thead>
+      <th style="width: 20%"></th>
+      <th style="width: 10%"></th>
+      <th style="width: 40%"></th>
+      <th></th>
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        <h6>名前</h6>
+      </td>
+      <td>
+        <%= f.text_field :name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h6>メールアドレス</h6>
+      </td>
+      <td>
+        <%= f.email_field :email %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+      <td>
+          <%= f.submit '編集内容を保存', class: "btn btn-success px-5" %>
+      </td>
+      <td>
+        <div class="d-grid gap-1 mx-auto text-center">
+          <%= link_to '退会する', customers_unsubscribe_path, class: "btn btn-danger px-3 mx-auto" %>
+        </div>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+</div>
+<% end %>
