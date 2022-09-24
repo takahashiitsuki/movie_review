@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
   
+  resources :review, only: [:new, :update]
+  
   root to: "homes#top"
   
   get 'movies' => "movies#search"
 
-  get 'movies/:id' => "movies#show"
+  get 'movies/:id' => "movies#show", as: 'movie'
   
   get 'user' => "users/user#show"
   get 'user/edit' => "users/user#edit"
