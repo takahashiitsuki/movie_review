@@ -2,14 +2,15 @@ Rails.application.routes.draw do
   
   root to: "homes#top"
   
-  get 'movies/search' => "movies#search"
+  get 'movies' => "movies#search"
 
-  get 'movies/show' => "movies#show"
+  get 'movies/:id' => "movies#show"
   
-  get 'mypage' => "user/homes#top"
-  
-  get 'mypage/edit' => "user/homes#edit"
-  update 'mypage/edit' => "user/homes#update"
+  get 'user' => "users/user#show"
+  get 'user/edit' => "users/user#edit"
+  patch 'user/edit' => "users/user#update"
+  get '/user/unsubscribe' => 'users/user#unsubscribe'
+  patch '/user/withdraw' => 'users/user#withdraw'
   
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"

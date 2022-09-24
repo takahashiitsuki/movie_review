@@ -1,7 +1,7 @@
 <h1>映画検索</h1>
 
 <div>
-  <%= form_tag(movies_search_path, method: :get) do %>
+  <%= form_tag(movies_path, method: :get) do %>
     <%= search_field_tag :looking_for, nil, placeholder: 'Movie Title...' %>
     <%= submit_tag '検索' %>
   <% end %>
@@ -18,7 +18,7 @@
             <div class="card">
                 <div class="card-upperinfo">
                     <%if movieinfo['table']['results'][i]['table']['title'].present?%>
-                        <h3><%= link_to movieinfo['table']['results'][i]['table']['title'],detail_path(movieinfo['table']['results'][i]['table']['id']) %></h3>
+                        <h3><%= link_to movieinfo['table']['results'][i]['table']['title'],movies_path(movieinfo['table']['results'][i]['table']['id']) %></h3>
                     <%end%>
 
                     <% if movieinfo['table']['results'][i]['table']['release_date'].present? %>
@@ -35,5 +35,30 @@
         <%end%>
     </div>
 <%else%>
-   
+    <%# 検索されていない時にトレンドコンテンツを表示する %>
+    <h2>本日の世界のトレンド</h2>
+    ====================
+    <% movieinfo = JSON.parse((Tmdb::Movie.popular).to_json) %>
+    <% i = 0 %>
+    <div class="card-wrapper">
+        <% while i < movieinfo['table']['results'].count %>
+            <div class="card">
+                <div class="card-upperinfo">
+                    <%if movieinfo['table']['results'][i]['table']['title'].present?%>
+                        <h3><%= link_to movieinfo['table']['results'][i]['table']['title'], movies_path(movieinfo['table']['results'][i]['table']['id'])%></h3>
+                    <%end%>
+
+                    <% if movieinfo['table']['results'][i]['table']['release_date'].present? %>
+                        <p class="release-date"><%= movieinfo['table']['results'][i]['table']['release_date'] %></p>
+                    <%end%>
+                </div>
+
+                <% if movieinfo['table']['results'][i]['table']['poster_path'].present? %>
+                    <p><%= image_tag 'https://image.tmdb.org/t/p/w1280' + movieinfo['table']['results'][i]['table']['poster_path'],class: "card-img" %></p>
+                <%end%>
+            </div>
+
+            <% i += 1%>
+        <%end%>
+    </div>
 <%end%>

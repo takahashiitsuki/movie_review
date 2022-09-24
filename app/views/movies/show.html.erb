@@ -1,2 +1,7 @@
-<h1>Movies#show</h1>
-<p>Find me in app/views/movies/show.html.erb</p>
+<div class="container col-lg-7">
+  映画情報
+  
+    <h3><%= @movie['table']['results'][0]['table']['title'] %></h3>
+    <h3><%= @movie['table']['results'][0]['table']['id'] %></h3>
+    <p><%= image_tag 'https://image.tmdb.org/t/p/w1280' + movieinfo['table']['results'][0]['table']['poster_path'],class: "card-img" %></p>
+</div>
