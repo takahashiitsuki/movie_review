@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   
-  resources :review, only: [:new, :update]
+  resources :reviews, only: [:show, :index, :destroy]
   
   root to: "homes#top"
   
@@ -8,19 +8,22 @@ Rails.application.routes.draw do
 
   get 'movies/:id' => "movies#show", as: 'movie'
   
-  get 'user' => "users/user#show"
-  get 'user/edit' => "users/user#edit"
-  patch 'user/edit' => "users/user#update"
-  get '/user/unsubscribe' => 'users/user#unsubscribe'
-  patch '/user/withdraw' => 'users/user#withdraw'
+  get 'reviews/:id/new' => "reviews#new", as: 'new_review'
+  post 'reviews' => "reviews#create"
+  
+  get 'user' => "users/users#show"
+  get 'user/edit' => "users/users#edit"
+  patch 'user/edit' => "users/users#update"
+  get '/user/unsubscribe' => 'users/users#unsubscribe'
+  patch '/user/withdraw' => 'users/users#withdraw'
   
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }
   
   devise_for :users,skip: [:passwords], controllers: {
-    registrations: "user/registrations",
-    sessions: 'user/sessions'
+    registrations: "users/registrations",
+    sessions: 'users/sessions'
   }
   
   devise_scope :user do

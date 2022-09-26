@@ -1,0 +1,57 @@
+<div class="container">
+  レビュー投稿
+  <table class="table">
+    <tr>
+      <td>
+        投稿者
+      </td>
+      <td>
+        <%= current_user.name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        映画
+      </td>
+      <td>
+        <h3><%= @movie['table']['title'] %></h3>
+      </td>
+    </tr>
+    <%= form_with model: @review do |f| %>
+    <tr>
+      <td>
+        レビュータイトル
+      </td>
+      <td>
+        <%= f.text_field :title %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= f.label :star,'評価 '%>
+      </td>
+      <td>
+        <div class="firld" id="star">
+    <%= f.hidden_field :star, id: :review_star %>
+    </div>
+      </td>
+      
+    </tr>
+  </table>
+  <h4>本文</h4>
+    <%= f.text_area :body %>
+  <%= f.submit '投稿' %>
+  <script>
+  $('#star').empty();
+  $('#star').raty({
+    size     : 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+
+    scoreName: 'review[star]',
+    half: false,
+  });
+  </script>
+  <% end %>
+  
+</div>

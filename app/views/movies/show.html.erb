@@ -2,5 +2,5 @@
   映画情報
     <h3><%= @movie['table']['title'] %></h3>
     <p><%= image_tag 'https://image.tmdb.org/t/p/w1280' + @movie['table']['poster_path'],size: "300x450",class: "card-img" %></p>
-     <%= link_to "レビューを投稿する", destroy_admin_session_path, method: :delete,class: "btn btn-outline-dark mx-1" %>
+     <%= link_to "レビューを投稿する", new_review_path,class: "btn btn-outline-dark mx-1" %>
 </div>

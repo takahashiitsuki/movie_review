@@ -1,0 +1,10 @@
+<div class="container">
+  レビュー一覧
+  <%= @reviews.each do |review| %>
+  <%= movieinfo = JSON.parse((Tmdb::Search.movie(review.movie_id).to_json) %>
+
+  <p><%= review.title %></p>
+  <span><%= movieinfo['table']['title'] %></span>
+  
+<% end %>
+</div>
