@@ -1,9 +1,9 @@
 class Users::ReviewsController < ApplicationController
   def new
     @movie = JSON.parse((Tmdb::Movie.detail(params[:id])).to_json)
-    
+
   end
-  
+
   def create
     review = Review.new(review_params)
     review.save
@@ -15,7 +15,7 @@ class Users::ReviewsController < ApplicationController
 
   def index
   end
-  
+
   def destroy
   end
 end

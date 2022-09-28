@@ -17,7 +17,7 @@
         <h3><%= @movie['table']['title'] %></h3>
       </td>
     </tr>
-    <%= form_with model: @review do |f| %>
+    <%= form_with model: @review ,url: new_review_path(@movie['table']['id']), method: :post do |f| %>
     <tr>
       <td>
         レビュータイトル
@@ -28,14 +28,14 @@
     </tr>
     <tr>
       <td>
-        <%= f.label :star,'評価 '%>
+        <%= f.label :star,'評価 ' %>
       </td>
       <td>
-        <div class="firld" id="star">
+        <div class="form-group " id="review_star">
     <%= f.hidden_field :star, id: :review_star %>
     </div>
       </td>
-      
+
     </tr>
   </table>
   <h4>本文</h4>
@@ -48,10 +48,10 @@
     starOff:  '<%= asset_path('star-off.png') %>',
     starOn : '<%= asset_path('star-on.png') %>',
 
-    scoreName: 'review[star]',
+    // scoreName: 'review[star]',
     half: false,
   });
   </script>
   <% end %>
-  
+
 </div>

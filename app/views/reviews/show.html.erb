@@ -30,20 +30,20 @@
         評価
       </td>
       <td>
-        <div id="star-rate<%= review.id%>"></div>
+        <div id="star-rate<%= @review.id%>"></div>
         <script>
-      $('#star-rate<%= review.id%>').raty({
+      $('#star-rate<%= @review.id%>').raty({
         size      : 36,
         starOff   : '<%= asset_path('star-off.png') %>',
         starOn    : '<%= asset_path('star-on.png') %>',
         half      : false,
         readOnly: true,
-        score: <%= review.star %>,
+        score: <%= @review.star %>,
       });
     </script>
       </td>
     </tr>
-    
+
   </table>
-  <%= review.body %>
+  <%= @review.body %>
 </div>
