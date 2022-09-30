@@ -20,7 +20,19 @@ class ReviewsController < ApplicationController
   end
 
   def index
-    @reviews = Review.all
+    if params[:looking_for].present?
+      @reviews = Review.where("title LIKE ?", "%#{params[:looking_for]}%")
+    else
+      @reviews = Review.all
+    end
+  end
+
+  def search
+    if params[:looking_for].present?
+      @reviews = Review.where("name LIKE ?", "%#{words}%")
+    else
+      @reviews = Review.all
+    end
   end
 
   def destroy

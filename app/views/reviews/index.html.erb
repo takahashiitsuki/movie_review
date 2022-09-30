@@ -1,10 +1,41 @@
 <div class="container">
   レビュー一覧
-  <%= @reviews.each do |review| %>
-  <%= movieinfo = JSON.parse((Tmdb::Search.movie(review.movie_id).to_json) %>
 
-  <p><%= review.title %></p>
-  <span><%= movieinfo['table']['title'] %></span>
-  
-<% end %>
+  <div>
+    <%= form_with url: reviews_path, local: :true, method: :get do |f| %>
+      <%= f.text_field :looking_for, placeholder: 'Review Title...' %>
+      <%= f.submit '検索' %>
+    <% end %>
+  </div>
+
+  <div>
+    <table class="table">
+      <thead>
+        <th>
+          レビュータイトル
+        </th>
+        <th>
+          投稿者
+        </th>
+        <th>
+          映画タイトル
+        </th>
+      </th>
+      <% @reviews.each do |review| %>
+        <tr>
+          <% movieinfo = JSON.parse((Tmdb::Movie.detail(review.movie_id).to_json)) %>
+          <td>
+          <%= link_to review.title, review_path(review.id) %>
+          </td>
+          <td>
+          <%= review.user.name %>
+          </td>
+          <td>
+          <%= link_to movieinfo['table']['title'],movie_path(review.movie_id) %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+
 </div>
