@@ -5,7 +5,7 @@
 </div>
 <br>
 
-<%= form_with model: @user, url:  '/mypage', method: :patch do |f| %>
+<%= form_with model: @user, url:  user_edit_path, method: :patch do |f| %>
 <div class="container col-lg-10 mb-5">
   <table class="table table-borderless">
     <thead>
@@ -39,7 +39,7 @@
       </td>
       <td>
         <div class="d-grid gap-1 mx-auto text-center">
-          <%= link_to '退会する', users_unsubscribe_path, class: "btn btn-danger px-3 mx-auto" %>
+          <%= link_to '退会する', user_unsubscribe_path, class: "btn btn-danger px-3 mx-auto" %>
         </div>
       </td>
     </tr>

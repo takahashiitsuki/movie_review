@@ -1,21 +1,21 @@
 Rails.application.routes.draw do
   
-  resources :reviews, only: [:show, :index, :destroy]
-  
   root to: "homes#top"
   
   get 'movies' => "movies#search"
 
   get 'movies/:id' => "movies#show", as: 'movie'
   
+  resources :reviews, only: [:show, :index, :destroy]
+  
   get 'reviews/:id/new' => "reviews#new", as: 'new_review'
   post 'reviews' => "reviews#create"
   
-  get 'user' => "users/users#show"
-  get 'user/edit' => "users/users#edit"
-  patch 'user/edit' => "users/users#update"
-  get '/user/unsubscribe' => 'users/users#unsubscribe'
-  patch '/user/withdraw' => 'users/users#withdraw'
+  get 'user' => "users#show"
+  get 'user/edit' => "users#edit"
+  patch 'user/edit' => "users#update"
+  get '/user/unsubscribe' => 'users#unsubscribe'
+  patch '/user/withdraw' => 'users#withdraw'
   
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
@@ -30,6 +30,4 @@ Rails.application.routes.draw do
     post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
   end
   
-
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

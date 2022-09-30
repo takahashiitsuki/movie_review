@@ -3,7 +3,9 @@
 <h5>マイページ</h5>
 </div>
 <div class="form-group postion-center">
-<%= link_to '編集する',root_path, class:"btn btn-success" %>
+    <% if current_user.name != "guestuser" %>
+        <%= link_to '編集する',user_edit_path, class:"btn btn-success" %>
+    <% end %>
 </div>
 </div>
 
