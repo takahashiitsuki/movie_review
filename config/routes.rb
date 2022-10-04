@@ -17,6 +17,12 @@ Rails.application.routes.draw do
   get '/user/unsubscribe' => 'users#unsubscribe'
   patch '/user/withdraw' => 'users#withdraw'
   
+  namespace :admin do
+  
+    resources :users, only: [:index, :show, :edit, :update]
+  
+  end
+  
   devise_for :admin, skip: [:registrations, :passwords], controllers: {
     sessions: "admin/sessions"
   }

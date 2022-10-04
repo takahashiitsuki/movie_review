@@ -1,0 +1,59 @@
+<div class="container col-lg-9">
+  <h3><div class="d-inline mt-5 px-3 bg-light text-dark">
+    <%= @user.name %>
+    さんの会員詳細</div></h3>
+</div>
+<br>
+<div class="container col-lg-9 mb-5">
+  <table class="table table-borderless">
+    <thead>
+      <th style="width: 20%"></th>
+      <th style="width: 25%"></th>
+      <th></th>
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        <h6>会員ID</h6>
+      </td>
+      <td>
+        <%= @user.id %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h6>氏名</h6>
+      </td>
+      <td>
+        <%= @user.name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h6>メールアドレス</h6>
+      </td>
+      <td>
+        <%= @user.email %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <h6>会員ステータス</h6>
+      </td>
+      <td>
+        <% if @user.is_deleted == false %>
+          <div class="text-success font-weight-bold">有効</div>
+        <% else %>
+          <div class="text-danger font-weight-bold">退会</div>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td></td>
+      <td>
+        <%= link_to "編集する",edit_admin_user_path,class: "btn btn-success btn-lg" %>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
