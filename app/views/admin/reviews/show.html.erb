@@ -1,0 +1,51 @@
+<div class="container">
+  レビュー詳細
+  <table class="table">
+    <tr>
+      <td>
+        レビュータイトル
+      </td>
+      <td>
+        <%= @review.title %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        投稿者
+      </td>
+      <td>
+        <%= @review.user.name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        映画
+      </td>
+      <td>
+        <%= link_to @movie['table']['title'],movie_path(@movie['table']['id']) %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        評価
+      </td>
+      <td>
+        <div id="star-rate<%= @review.id%>"></div>
+        <script>
+      $('#star-rate<%= @review.id%>').raty({
+        size      : 36,
+        starOff   : '<%= asset_path('star-off.png') %>',
+        starOn    : '<%= asset_path('star-on.png') %>',
+        half      : false,
+        readOnly: true,
+        score: <%= @review.star %>,
+      });
+    </script>
+      </td>
+    </tr>
+  </table>
+  レビュー内容<br>
+  <%= @review.body %>
+</div>
+
+削除

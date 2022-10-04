@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   get 'movies/:id' => "movies#show", as: 'movie'
   
-  resources :reviews, only: [:show, :index, :destroy]
+  resources :reviews, only: [:show, :index, :edit, :destroy]
   
   get 'reviews/:id/new' => "reviews#new", as: 'new_review'
   post 'reviews' => "reviews#create"
@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   namespace :admin do
   
     resources :users, only: [:index, :show, :edit, :update]
+    resources :reviews, only: [:index, :show, :destroy]
   
   end
   
