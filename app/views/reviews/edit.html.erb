@@ -54,4 +54,6 @@
   レビュー内容<br>
   <%= f.text_area :body %>
   <% end %>
+  レビュー削除
+  <%= link_to '削除する', review_path(@review), method: :destroy, class="btn btn-danger btn-lg" %>
 </div>
