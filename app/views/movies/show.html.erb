@@ -1,7 +1,9 @@
 <div class="container col-lg-7">
   映画情報
     <h3><%= @movie['table']['title'] %></h3>
-    <%= @movie['table']['genre'] %>
+    <% @movie['table']['genres'].each do |genre| %>
+      <%= genre["table"]["name"] %>
+    <% end %>
     <p><%= image_tag 'https://image.tmdb.org/t/p/w1280' + @movie['table']['poster_path'],size: "300x450",class: "card-img" %></p>
      <%= link_to "レビューを投稿する", new_review_path,class: "btn btn-outline-dark mx-1" %>
 </div>

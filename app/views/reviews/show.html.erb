@@ -46,4 +46,10 @@
   </table>
   レビュー内容<br>
   <%= @review.body %>
+  <div>
+        <%= form_with model: [@review, @comment],local:false do |f| %>
+          <%= f.text_area :comment %><br>
+          <%= f.submit "送信" %>
+        <% end %>
+      </div>
 </div>
