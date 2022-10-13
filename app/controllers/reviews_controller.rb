@@ -17,6 +17,7 @@ class ReviewsController < ApplicationController
   def show
     @review = Review.find(params[:id])
     @movie = JSON.parse((Tmdb::Movie.detail(@review.movie_id)).to_json)
+    @comment = Comment.new
   end
 
   def index

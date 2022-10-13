@@ -8,3 +8,19 @@
     <p><%= image_tag 'https://image.tmdb.org/t/p/w1280' + @movie['table']['poster_path'],size: "300x450",class: "card-img" %></p>
      <%= link_to "レビューを投稿する", new_review_path,class: "btn btn-outline-dark mx-1" %>
 </div>
+
+<div>
+  <% @review.comments.each do |comment| %>
+      <%= comment.body %>
+      <% if comment.user == current_user %>
+      <%= link_to "Destroy", book_book_comment_path(book_comment.book, book_comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger",remote: true %>
+    <% end %></p>
+  <% end %>
+</div>
+
+<div>
+  <%= form_with model: [@review, @comment],local:false do |f| %>
+    <%= f.text_area :comment %><br>
+    <%= f.submit "送信" %>
+  <% end %>
+</div>

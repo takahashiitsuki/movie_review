@@ -1,20 +1,20 @@
 class CommentsController < ApplicationController
   def create
-    book = Book.find(params[:book_id])
-    comment = current_user.book_comments.new(book_comment_params)
-    comment.book_id = book.id
+    review = Review.find(params[:review_id])
+    comment = current_user.comments.new(comment_params)
+    comment.movie_id = movie.id
     comment.save
-    @book=Book.find(params[:book_id])
+    @movie=Movie.find(params[:book_id])
   end
   
   def destroy
-    BookComment.find(params[:id]).destroy
-    @book=Book.find(params[:book_id])
+    Comment.find(params[:id]).destroy
+    @review=Review.find(params[:movie_id])
   end
   
   private
   
-  def book_comment_params
-    params.require(:book_comment).permit(:comment)
+  def comment_params
+    params.require(:comment).permit(:comment)
   end
 end
