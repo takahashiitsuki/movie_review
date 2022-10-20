@@ -6,10 +6,9 @@ Rails.application.routes.draw do
 
   get 'movies/:id' => "movies#show", as: 'movie'
   
-  resources :reviews, only: [:show, :index, :edit, :destroy]
-  
-  get 'reviews/:id/new' => "reviews#new", as: 'new_review'
-  post 'reviews' => "reviews#create"
+  resources :reviews do
+    resources :comments,only:[:create,:destroy]
+  end
   
   get 'user' => "users#show"
   get 'user/edit' => "users#edit"

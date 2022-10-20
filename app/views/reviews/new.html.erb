@@ -43,6 +43,7 @@
     <%= f.hidden_field :movie_id, value: @movie['table']['id'] %>
   <%= f.submit '投稿' %>
   <script>
+  // $('#star').empty();
   $('#star').raty({
     size     : 36,
     starOff:  '<%= asset_path('star-off.png') %>',

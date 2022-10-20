@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
 
   def new
     @user = current_user
-    @movie = JSON.parse((Tmdb::Movie.detail(params[:id])).to_json)
+    @movie = JSON.parse((Tmdb::Movie.detail(params[:movie_id])).to_json)
     @review = Review.new
   end
 
@@ -12,6 +12,7 @@ class ReviewsController < ApplicationController
     @review.user_id = current_user.id
     @review.save
     redirect_to review_path(@review.id)
+    
   end
 
   def show
@@ -45,7 +46,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:title, :star, :body, :user_id, :movie_id)
+    params.require(:review).permit(:title, :star, :body, :movie_id)
   end
 
 end
