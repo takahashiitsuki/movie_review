@@ -1,6 +1,7 @@
 <div>
-  <%= form_with model: [@book, @book_comment],local:false do |f| %>
-    <%= f.text_area :comment %><br>
-    <%= f.submit "送信" %>
-  <% end %>
+  <%= form_with model: [@review, @comment],local:false do |f| %>
+      コメント<br>
+      <%= f.text_area :body %><br>
+      <%= f.submit "送信" %>
+    <% end %>
 </div>
