@@ -8,8 +8,9 @@ class CommentsController < ApplicationController
   end
   
   def destroy
-    Comment.find(params[:id]).destroy
-    @review=Review.find(params[:movie_id])
+    Comment.find(params[:comment_id]).destroy
+    # @review=Review.find(params[:movie_id])
+    redirect_to review_path(params[:review_id])
   end
   
   private
