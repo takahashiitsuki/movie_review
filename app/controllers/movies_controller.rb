@@ -4,6 +4,10 @@ class MoviesController < ApplicationController
     
   end
   
+  def index
+    
+  end
+  
   def show
     @movie = JSON.parse((Tmdb::Movie.detail(params[:id])).to_json)
     

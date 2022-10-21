@@ -42,6 +42,10 @@ class ReviewsController < ApplicationController
     review.destroy
     redirect_to reviews_path
   end
+  
+  def hidden
+    review = Review.
+  end
 
   private
 

@@ -2,11 +2,10 @@ Rails.application.routes.draw do
   
   root to: "homes#top"
   
-  get 'movies' => "movies#search"
-
-  get 'movies/:id' => "movies#show", as: 'movie'
+  resources :movies, only:[:index, :show]
   
   resources :reviews do
+    patch '/:review_id/hidden' => "reviews#hidden"
     resources :comments,only:[:create,:destroy]
   end
   
