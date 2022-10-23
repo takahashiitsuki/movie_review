@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   resources :movies, only:[:index, :show]
   
   resources :reviews do
-    patch '/:review_id/hidden' => "reviews#hidden"
     resources :comments,only:[:create,:destroy]
   end
   

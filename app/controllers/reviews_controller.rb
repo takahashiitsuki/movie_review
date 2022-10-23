@@ -44,7 +44,10 @@ class ReviewsController < ApplicationController
   end
   
   def hidden
-    review = Review.
+    review = Review.find(params[:id])
+    review.hidden = true
+    review.save
+    redirect_to reviews_path
   end
 
   private
