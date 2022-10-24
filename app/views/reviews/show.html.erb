@@ -46,14 +46,25 @@
   </table>
   レビュー内容<br>
   <%= @review.body %>
-  
+
   <div>
+    <table>
   <% @review.comments.each do |comment| %>
+    <tr>
+      <td>
       <%= comment.body %>
+      </td>
+      <td>
+      <%= comment.user.name %>
+      </td>
+      <td>
       <% if comment.user == current_user %>
-      <%= link_to "Destroy", review_comment_path(comment.review, comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger",remote: true %>
-    <% end %></p>
+        <%= link_to "Destroy", review_comment_path(comment.review, comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger",remote: true %>
+      <% end %>
+      </td>
+    </tr>
   <% end %>
+  </table>
 </div>
 
 <div>
@@ -65,7 +76,7 @@
     <% end %>
   <% end %>
 </div>
-  
+
 </div>
 
 
