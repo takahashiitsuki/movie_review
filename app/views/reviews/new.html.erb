@@ -42,9 +42,10 @@
     <%= f.text_area :body %>
     <%= f.hidden_field :movie_id, value: @movie['table']['id'] %>
     
-  <%= f.submit '投稿' %>
+  <%= f.submit '投稿', :name => 'post', class: 'mr-5 btn btn-sm btn-warning text-white' %>
+  <%= f.submit '下書きに保存', :name => 'draft', class: 'mr-5 btn btn-sm btn-outline-secondary' %>
   <script>
-  // $('#star').empty();
+  $('#star').empty();
   $('#star').raty({
     size     : 36,
     starOff:  '<%= asset_path('star-off.png') %>',

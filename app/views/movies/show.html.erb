@@ -2,12 +2,11 @@
   映画情報
     <h3><%= @movie['table']['title'] %></h3>
     <% if @providers['results']['JP'].present? %>
-      <% if @providers['results']['JP']['flatrate'].present? %>
+      視聴可能サービス
         <% @providers['results']['JP']['flatrate'].each do |provider| %>
           <%= "　:" + provider['provider_name'] %>
         <% end %>
-      <% end %>
-    <% end %>
+    <% end %><br>
     ジャンル
     <% @movie['table']['genres'].each do |genre| %>
       <%= "　:" + genre["table"]["name"] %>

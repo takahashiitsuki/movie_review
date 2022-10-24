@@ -1,5 +1,5 @@
 <div class="container">
-  レビュー詳細
+  レビュー編集
   <table class="table">
     <tr>
       <td>
@@ -53,6 +53,10 @@
   </table>
   レビュー内容<br>
   <%= f.text_area :body %>
+  <%= f.submit "レシピを公開", :name => 'publicize_draft', class:'mr-5 btn btn-sm btn-warning' %>
+    <% if @review.is_draft == true %>
+      <%= f.submit "下書きを更新", :name => 'update_draft', class:'mr-5 btn btn-sm btn-outline-secondary' %>
+    <% end %>
   <% end %>
   レビュー削除
   <%= link_to '削除する', review_path(@review), method: :destroy, class="btn btn-danger btn-lg" %>
