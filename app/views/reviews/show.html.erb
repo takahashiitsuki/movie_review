@@ -30,9 +30,9 @@
         評価
       </td>
       <td>
-        <div id="star-rate<%= @review.id%>"></div>
+        <div id="star-rate"></div>
         <script>
-      $('#star-rate<%= @review.id%>').raty({
+      $('#star-rate').raty({
         size      : 36,
         starOff   : '<%= asset_path('star-off.png') %>',
         starOn    : '<%= asset_path('star-on.png') %>',
@@ -76,7 +76,10 @@
     <% end %>
   <% end %>
 </div>
-
+<% if current_user == @review.user %>
+    <%= link_to '編集', edit_review_path, class: 'btn btn-success' %>
+    <%= link_to '削除', review_path,method: :delete, class: 'btn btn-danger' %>
+  <% end %>
 </div>
 
 

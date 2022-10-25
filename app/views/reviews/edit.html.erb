@@ -22,42 +22,44 @@
         映画
       </td>
       <td>
-        <%= link_to @movie['table']['title'],movie_path(@movie['table']['id']) %>
+        <%= @movie['table']['title'] %>
       </td>
     </tr>
-    <%= form_with model: @review,url: admin_user_path(@review.id), method: "patch" do |f| %>
+    <%= form_with model: @review, method: "patch" do |f| %>
     <tr>
       <td>
         評価
       </td>
       <td>
-        <div id="star<%= @review.id%>"></div>
-        <%= f.hidden_field :star, id: :review_star, :value => 'score' %>
-        <script>
-      $('#star<%= @review.id%>').raty({
-        size      : 36,
-        starOff   : '<%= asset_path('star-off.png') %>',
-        starOn    : '<%= asset_path('star-on.png') %>',
-        half      : false,
-        readOnly: true,
-        score: <%= @review.star %>,
-        scoreName: 'review[star]',
-    
-        click: function(score) {
-        alert(score);
-        $("#review_star").val(score);
-      });
-    </script>
+        <div class="form_group" id="star">
+          <%= f.hidden_field :star, id: :review_star, :value => 'score' %>
+        </div>
       </td>
     </tr>
   </table>
   レビュー内容<br>
-  <%= f.text_area :body %>
-  <%= f.submit "レシピを公開", :name => 'publicize_draft', class:'mr-5 btn btn-sm btn-warning' %>
-    <% if @review.is_draft == true %>
-      <%= f.submit "下書きを更新", :name => 'update_draft', class:'mr-5 btn btn-sm btn-outline-secondary' %>
-    <% end %>
+  <%= f.text_area :body %><br>
+  <% if @review.is_draft == true %>
+    <%= f.submit "下書きを公開", :name => 'publicize_draft', class:'mr-5 btn btn-sm btn-warning' %>
+    <%= f.submit "下書きを更新", :name => 'update_draft', class:'mr-5 btn btn-sm btn-outline-secondary' %>
+  <% else %>
+    <%= f.submit "投稿を更新", :name => 'update_post', class:'mr-5 btn btn-sm btn-success' %>
   <% end %>
-  レビュー削除
-  <%= link_to '削除する', review_path(@review), method: :destroy, class="btn btn-danger btn-lg" %>
+  <script>
+       $('#star').raty({
+    size     : 36,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+
+
+    half: false,
+    scoreName: 'review[star]',
+    
+    click: function(score) {
+    alert(score);
+    $("#review_star").val(score);
+  }
+  });
+  </script>
+  <% end %>
 </div>

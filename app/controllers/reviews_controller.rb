@@ -40,6 +40,11 @@ class ReviewsController < ApplicationController
       @reviews = Review.all
     end
   end
+  
+  def edit
+    @review = Review.find(params[:id])
+    @movie = JSON.parse((Tmdb::Movie.detail(@review.movie_id)).to_json)
+  end
 
   def search
     if params[:looking_for].present?
@@ -63,23 +68,23 @@ class ReviewsController < ApplicationController
       # updateメソッドにはcontextが使用できないため、公開処理にはattributesとsaveメソッドを使用する
       @review.attributes = review_params.merge(is_draft: false)
       if @review.save(context: :publicize)
-        redirect_to reviews_path(@review.id)
+        redirect_to review_path(@review.id)
       else
         @review.is_draft = true
         render :edit, alert: "レシピを公開できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
       end
     # ②公開済みレシピの更新の場合
     elsif params[:update_post]
-      @review.attributes = post_recipe_params
+      @review.attributes = review_params
       if @review.save(context: :publicize)
-        redirect_to reviews_path(@review.id)
+        redirect_to review_path(@review.id)
       else
         render :edit, alert: "レシピを更新できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
       end
     # ③下書きレシピの更新（非公開）の場合
     else
       if @review.update(review_params)
-        redirect_to reviews_path(@review.id)
+        redirect_to review_path(@review.id)
       else
         render :edit, alert: "更新できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
       end
