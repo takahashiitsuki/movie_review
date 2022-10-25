@@ -1,5 +1,6 @@
 <div class="container">
   レビュー投稿
+  <%= form_with model: @review do |f| %>
   <table class="table">
     <tr>
       <td>
@@ -17,7 +18,6 @@
         <h3><%= @movie['table']['title'] %></h3>
       </td>
     </tr>
-    <%= form_with model: @review do |f| %>
     <tr>
       <td>
         レビュータイトル
@@ -50,7 +50,7 @@
     size     : 36,
     starOff:  '<%= asset_path('star-off.png') %>',
     starOn : '<%= asset_path('star-on.png') %>',
-
+    score: 3,
 
     half: false,
     scoreName: 'review[star]',

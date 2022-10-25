@@ -71,7 +71,7 @@ class ReviewsController < ApplicationController
         redirect_to review_path(@review.id)
       else
         @review.is_draft = true
-        render :edit, alert: "レシピを公開できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        render :edit, alert: "公開できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
       end
     # ②公開済みレシピの更新の場合
     elsif params[:update_post]
@@ -79,7 +79,7 @@ class ReviewsController < ApplicationController
       if @review.save(context: :publicize)
         redirect_to review_path(@review.id)
       else
-        render :edit, alert: "レシピを更新できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        render :edit, alert: "更新できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
       end
     # ③下書きレシピの更新（非公開）の場合
     else

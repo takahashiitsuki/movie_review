@@ -1,12 +1,13 @@
 <div class="container">
   レビュー編集
+  <%= form_with model: @review, method: "patch" do |f| %>
   <table class="table">
     <tr>
       <td>
         レビュータイトル
       </td>
       <td>
-        <%= @review.title %>
+        <%= f.text_field :title %>
       </td>
     </tr>
     <tr>
@@ -25,7 +26,7 @@
         <%= @movie['table']['title'] %>
       </td>
     </tr>
-    <%= form_with model: @review, method: "patch" do |f| %>
+
     <tr>
       <td>
         評価
@@ -50,11 +51,11 @@
     size     : 36,
     starOff:  '<%= asset_path('star-off.png') %>',
     starOn : '<%= asset_path('star-on.png') %>',
-
+    score: <%= @review.star %>,
 
     half: false,
     scoreName: 'review[star]',
-    
+
     click: function(score) {
     alert(score);
     $("#review_star").val(score);
