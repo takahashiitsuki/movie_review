@@ -10,16 +10,19 @@
       <% end %>
       <div class="col-lg-6 float-end text-right">
         <%= link_to "映画", movies_path, class: "btn btn-outline-dark mx-1" %>
-        <%= link_to "レビュー", reviews_path, class: "btn btn-outline-dark mx-1" %>
         <% if admin_signed_in? %>
+          <%= link_to "レビュー", admin_reviews_path, class: "btn btn-outline-dark mx-1" %>
           <%= link_to "ユーザー", admin_users_path, class:"btn btn-outline-dark mx-1" %>
           <%= link_to "ログアウト", destroy_admin_session_path, method: :delete,class: "btn btn-outline-dark mx-1" %>
-        <% elsif user_signed_in? %>
-          <%= link_to "マイページ", user_path, class: "btn btn-outline-dark mx-1" %>
-          <%= link_to "ログアウト", destroy_user_session_path, method: :delete,class: "btn btn-outline-dark mx-1" %>
         <% else %>
-          <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-dark mx-1" %>
-          <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-dark mx-1" %>
+          <%= link_to "レビュー", reviews_path, class: "btn btn-outline-dark mx-1" %>
+          <% if user_signed_in? %>
+            <%= link_to "マイページ", user_path, class: "btn btn-outline-dark mx-1" %>
+            <%= link_to "ログアウト", destroy_user_session_path, method: :delete,class: "btn btn-outline-dark mx-1" %>
+          <% else %>
+            <%= link_to "新規登録", new_user_registration_path, class: "btn btn-outline-dark mx-1" %>
+            <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-dark mx-1" %>
+          <% end %>
         <% end %>
       </div>
     </div>
