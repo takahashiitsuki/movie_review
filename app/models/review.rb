@@ -1,5 +1,6 @@
 class Review < ApplicationRecord
    belongs_to :user
+   belongs_to :movie
    has_many :comments,dependent: :destroy
    
    with_options presence: true, on: :publicize do

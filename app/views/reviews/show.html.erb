@@ -43,6 +43,12 @@
     </script>
       </td>
     </tr>
+    <% if @review.is_draft == true %>
+      <tr>
+        <td>ステータス</td>
+        <td>非公開</td>
+      </tr>
+    <% end %>
   </table>
   レビュー内容<br>
   <%= @review.body %>

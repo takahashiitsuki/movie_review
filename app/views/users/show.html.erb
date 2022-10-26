@@ -19,7 +19,40 @@
         <td class="secondary">メールアドレス</td>
         <td scope="col" style="width: 80%"><%= current_user.email %></td>
     </tr>
-
 </table>
+<div>
+    投稿レビュー
+    <table class="table">
+      <thead>
+        <th>
+          レビュータイトル
+        </th>
+        <th>
+          映画タイトル
+        </th>
+        <th>
+          ステータス
+        </th>
+      </thead>
+      <% @reviews.each do |review| %>
+        <tr>
+            <% movieinfo = JSON.parse((Tmdb::Movie.detail(review.movie_id).to_json)) %>
+            <td>
+            <%= link_to review.title, review_path(review.id) %>
+            </td>
+            <td>
+            <%= link_to movieinfo['table']['title'],movie_path(review.movie_id) %>
+            </td>
+            <td>
+              <% if review.is_draft == true %>
+                下書き
+              <% else %>
+                公開
+              <% end %>
+            </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
 
 </div>

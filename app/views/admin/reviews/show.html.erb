@@ -46,8 +46,5 @@
   </table>
   レビュー内容<br>
   <%= @review.body %>
-  <% if current_user == @review.user %>
-    <%= link_to '編集', edit_review_path, class: 'btn btn-success' %>
-    <%= link_to '削除', review_path,method: :delete, class: 'btn btn-danger' %>
-  <% end %>
+  <%= link_to '削除', review_path,method: :delete, class: 'btn btn-danger' %>
 </div>

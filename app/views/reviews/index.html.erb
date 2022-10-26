@@ -12,6 +12,9 @@
     <table class="table">
       <thead>
         <th>
+          レビューID
+        </th>
+        <th>
           レビュータイトル
         </th>
         <th>
@@ -20,10 +23,17 @@
         <th>
           映画タイトル
         </th>
-      </th>
+        <th>
+          ステータス
+        </th>
+      </thead>
       <% @reviews.each do |review| %>
+        <% unless (review.is_draft == true) && (review.user != current_user) %>
         <tr>
             <% movieinfo = JSON.parse((Tmdb::Movie.detail(review.movie_id).to_json)) %>
+            <td>
+              <% link_to review.id, review_path(review.id) %>
+            </td>
             <td>
             <%= link_to review.title, review_path(review.id) %>
             </td>
@@ -33,7 +43,15 @@
             <td>
             <%= link_to movieinfo['table']['title'],movie_path(review.movie_id) %>
             </td>
+            <td>
+              <% if review.is_draft == true %>
+                下書き
+              <% else %>
+                公開
+              <% end %>
+            </td>
         </tr>
+        <% end %>
       <% end %>
     </table>
   </div>
