@@ -13,8 +13,12 @@ class Admin::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to admin_user_path(user_params)
+    if @user.is_deleted == false
+    @user.update(is_deleted: true)
+    else
+      @user.update(is_deleted: false)
+    end
+    redirect_to admin_user_path(@user.id)
   end
 
   private
