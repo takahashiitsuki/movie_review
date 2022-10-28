@@ -37,7 +37,12 @@ class ReviewsController < ApplicationController
 
   def index
     if params[:looking_for].present?
-      @reviews = Review.where("title LIKE ?", "%#{params[:looking_for]}%")
+      if params[:range] == "タイトル"
+        @reviews = Review.where("title LIKE ?", "%#{params[:looking_for]}%")
+      else
+        @users = User.where("name LIKE ?", "%#{params[:looking_for]}%")
+        @reviews = Review.where(user_id: @users.ids)
+      end
     else
       @reviews = Review.all
     end

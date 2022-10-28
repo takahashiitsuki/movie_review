@@ -4,72 +4,19 @@
   <div>
     <%= form_with url: reviews_path, local: :true, method: :get do |f| %>
       <%= f.text_field :looking_for, placeholder: 'Review Title...' %>
+      <%= f.select :range, options_for_select([["タイトル"], ["投稿者"]]) %>
       <%= f.submit '検索' %>
     <% end %>
   </div>
-
+  
   <div>
-    <table class="table">
-      <thead>
-        <th>
-          レビューID
-        </th>
-        <th>
-          レビュータイトル
-        </th>
-        <th>
-          投稿者
-        </th>
-        <th>
-          映画タイトル
-        </th>
-        <th>
-          評価
-        </th>
-        <th>
-          ステータス
-        </th>
-      </thead>
-      <% @reviews.each do |review| %>
-        <% unless (review.is_draft == true) && (review.user != current_user) %>
-        <tr>
-            <% movieinfo = JSON.parse((Tmdb::Movie.detail(review.movie_id).to_json)) %>
-            <td>
-              <%= link_to review.id, review_path(review.id) %>
-            </td>
-            <td>
-            <%= link_to review.title, review_path(review.id) %>
-            </td>
-            <td>
-            <%= review.user.name %>
-            </td>
-            <td>
-            <%= link_to movieinfo['table']['title'],movie_path(review.movie_id) %>
-            </td>
-            <td>
-              <div id="star-rate<%= review.id%>"></div>
-              <script>
-                $('#star-rate<%= review.id%>').raty({
-                size      : 36,
-                starOff   : '<%= asset_path('star-off.png') %>',
-                starOn    : '<%= asset_path('star-on.png') %>',
-                half      : false,
-                readOnly: true,
-                score: <%= review.star %>,
-                });
-              </script>
-            </td>
-            <td>
-              <% if review.is_draft == true %>
-                下書き
-              <% else %>
-                公開
-              <% end %>
-            </td>
-        </tr>
-        <% end %>
-      <% end %>
-    </table>
+    <% if params[:looking_for].present? %>
+      <%= params[:looking_for] + "　の" +  params[:range] %>の検索結果
+    <% end %>
+  </div>
+
+  <div class = "review_list">
+    <%= render 'reviews/list', reviews: @reviews %>
   </div>
 
 </div>

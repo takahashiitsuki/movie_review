@@ -1,5 +1,6 @@
-<div class="container col-lg-7">
-  映画情報
+<div class="container col-lg-12">
+  <div class="col-lg-7 mx-auto">
+    映画情報
     <h3><%= @movie['table']['title'] %></h3>
     <% if @providers['results']['JP'].present? %>
       視聴可能サービス
@@ -11,6 +12,13 @@
     <% @movie['table']['genres'].each do |genre| %>
       <%= "　:" + genre["table"]["name"] %>
     <% end %>
+    <br>
+    <%= link_to "レビューを投稿する", new_review_path(movie_id: @movie['table']['id']),class: "btn btn-outline-dark mx-1" %><br>
+  </div>
+  <div class="col-lg-3 mx-auto">
     <p><%= image_tag 'https://image.tmdb.org/t/p/w1280' + @movie['table']['poster_path'],class: "card-img" %></p>
-     <%= link_to "レビューを投稿する", new_review_path(movie_id: @movie['table']['id']),class: "btn btn-outline-dark mx-1" %>
+  </div>
+  <div>
+    <%= render 'reviews/list', reviews: @reviews %>
+  </div>
 </div>

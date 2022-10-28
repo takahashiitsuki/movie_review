@@ -20,6 +20,16 @@
     </tr>
     <tr>
       <td>
+        ジャンル
+      </td>
+      <td>
+        <% @movie['table']['genres'].each do |genre| %>
+          <%= "　:" + genre["table"]["name"] %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>
         レビュータイトル
       </td>
       <td>
