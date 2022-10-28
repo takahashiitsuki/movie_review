@@ -53,10 +53,11 @@
                         <p class="release-date"><%= movieinfo['table']['results'][i]['table']['release_date'] %></p>
                     <%end%>
                 </div>
-
+                <div>
                 <% if movieinfo['table']['results'][i]['table']['poster_path'].present? %>
-                    <p><%= image_tag 'https://image.tmdb.org/t/p/w1280' + movieinfo['table']['results'][i]['table']['poster_path'],class: "card-img" %></p>
+                    <p><%= image_tag 'https://image.tmdb.org/t/p/w780' + movieinfo['table']['results'][i]['table']['poster_path'],class: "card-img" %></p>
                 <%end%>
+                </div>
             </div>
 
             <% i += 1%>

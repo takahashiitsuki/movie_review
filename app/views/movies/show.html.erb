@@ -4,13 +4,13 @@
     <% if @providers['results']['JP'].present? %>
       視聴可能サービス
         <% @providers['results']['JP']['flatrate'].each do |provider| %>
-          <%= "　:" + provider['provider_name'] %>
+          <%= image_tag 'https://www.themoviedb.org/t/p/w45'+ provider['logo_path'], title: provider['provider_name'] %>
         <% end %>
     <% end %><br>
     ジャンル
     <% @movie['table']['genres'].each do |genre| %>
       <%= "　:" + genre["table"]["name"] %>
     <% end %>
-    <p><%= image_tag 'https://image.tmdb.org/t/p/w1280' + @movie['table']['poster_path'],size: "300x450",class: "card-img" %></p>
+    <p><%= image_tag 'https://image.tmdb.org/t/p/w1280' + @movie['table']['poster_path'],class: "card-img" %></p>
      <%= link_to "レビューを投稿する", new_review_path(movie_id: @movie['table']['id']),class: "btn btn-outline-dark mx-1" %>
 </div>
