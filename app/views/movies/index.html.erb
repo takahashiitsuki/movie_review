@@ -1,14 +1,15 @@
 <h1>映画検索</h1>
 
 <div>
-  <%= form_tag(movies_path, method: :get) do %>
-    <%= search_field_tag :looking_for, nil, placeholder: 'Movie Title...' %>
-    <%= submit_tag '検索' %>
+  <%= form_with url: movies_path, local: true, method: :get do |f| %>
+    <%= f.text_field :looking_for, placeholder: 'Movie Title...' %>
+    <!--%= f.select :genre_id, options_from_collection_for_select(@genres['table'], ['id'], ['name']) %-->
+    <%= f.submit '検索' %>
   <% end %>
 </div>
 
 <%# 検索された時にコンテンツを表示する %>
-<%if params[:looking_for].present? %>
+<% if params[:looking_for].present? %>
    <% movieinfo = JSON.parse((Tmdb::Search.movie(params[:looking_for])).to_json) %>
     <h2><%= params[:looking_for] %>の検索結果</h2>
     =====================

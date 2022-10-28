@@ -5,6 +5,7 @@ class MoviesController < ApplicationController
   end
   
   def index
+    @genres = JSON.parse((Tmdb::Genre.movie_list).to_json)
     
   end
   

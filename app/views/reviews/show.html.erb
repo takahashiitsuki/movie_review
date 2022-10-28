@@ -53,33 +53,19 @@
   レビュー内容<br>
   <%= @review.body %>
 
-  <div>
-    <table>
-  <% @review.comments.each do |comment| %>
-    <tr>
-      <td>
-      <%= comment.body %>
-      </td>
-      <td>
-      <%= comment.user.name %>
-      </td>
-      <td>
-      <% if comment.user == current_user %>
-        <%= link_to "Destroy", review_comment_path(comment.review, comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger",remote: true %>
-      <% end %>
-      </td>
-    </tr>
-  <% end %>
-  </table>
-</div>
+  <div class = "comment_list">
+    <%= render 'comments/list', review: @review %>
+  </div>
 
-<div>
+<div class = "comment_form">
   <% if user_signed_in?  %>
-    <%= form_with model: [@review, @comment] do |f| %>
+    <div>
+  <%= form_with model: [@review, @comment],local:false do |f| %>
       コメント<br>
       <%= f.text_area :body %><br>
       <%= f.submit "送信" %>
     <% end %>
+</div>
   <% end %>
 </div>
 <% if current_user == @review.user %>

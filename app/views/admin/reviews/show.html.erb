@@ -46,5 +46,10 @@
   </table>
   レビュー内容<br>
   <%= @review.body %><br>
+  
+  <div class = "comment_list">
+    <%= render 'comments/list', review: @review %>
+  </div>
+  
   <%= link_to '削除', admin_review_path(@review.id),method: :delete, class: 'btn btn-danger' %>
 </div>

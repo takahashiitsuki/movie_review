@@ -24,6 +24,9 @@
           映画タイトル
         </th>
         <th>
+          評価
+        </th>
+        <th>
           ステータス
         </th>
       </thead>
@@ -32,7 +35,7 @@
         <tr>
             <% movieinfo = JSON.parse((Tmdb::Movie.detail(review.movie_id).to_json)) %>
             <td>
-              <% link_to review.id, review_path(review.id) %>
+              <%= link_to review.id, review_path(review.id) %>
             </td>
             <td>
             <%= link_to review.title, review_path(review.id) %>
@@ -42,6 +45,19 @@
             </td>
             <td>
             <%= link_to movieinfo['table']['title'],movie_path(review.movie_id) %>
+            </td>
+            <td>
+              <div id="star-rate<%= review.id%>"></div>
+              <script>
+                $('#star-rate<%= review.id%>').raty({
+                size      : 36,
+                starOff   : '<%= asset_path('star-off.png') %>',
+                starOn    : '<%= asset_path('star-on.png') %>',
+                half      : false,
+                readOnly: true,
+                score: <%= review.star %>,
+                });
+              </script>
             </td>
             <td>
               <% if review.is_draft == true %>

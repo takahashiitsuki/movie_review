@@ -14,6 +14,7 @@ class ReviewsController < ApplicationController
       if @review.save(context: :publicize)
         redirect_to review_path(@review.id)
       else
+        @movie = JSON.parse((Tmdb::Movie.detail(@review.movie_id)).to_json)
         render :new, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
       end
     # 下書きボタンを押下した場合
@@ -21,6 +22,7 @@ class ReviewsController < ApplicationController
       if @review.update(is_draft: true)
         redirect_to review_path(@review.id)
       else
+        @movie = JSON.parse((Tmdb::Movie.detail(@review.movie_id)).to_json)
         render :new, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
       end
     end
