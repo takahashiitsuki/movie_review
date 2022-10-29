@@ -38,20 +38,6 @@
     </tr>
     <tr>
       <td>
-        タグ
-      </td>
-      <td>
-        <div class = "tag_list">
-          <%= render 'tags/list', tags: @tags %>
-        </div>
-        <% form_with model: [@tag, @review],local: false do |f| %>
-          <%= f.text_field :name %>
-          <%= f.submit "タグ追加" %>
-        <% end %>
-      </td>
-    </tr>
-    <tr>
-      <td>
         <%= f.label :star,'評価 '%>
       </td>
       <td>
@@ -65,7 +51,7 @@
   <h4>本文</h4>
     <%= f.text_area :body %><br>
     <%= f.hidden_field :movie_id, value: @movie['table']['id'] %>
-    
+
   <%= f.submit '投稿', :name => 'post', class: 'mr-5 btn btn-sm btn-warning text-white' %>
   <%= f.submit '下書きに保存', :name => 'draft', class: 'mr-5 btn btn-sm btn-outline-secondary' %>
   <script>
@@ -78,8 +64,8 @@
 
     half: false,
     scoreName: 'review[star]',
-    
-    
+
+
   });
   </script>
   <% end %>
