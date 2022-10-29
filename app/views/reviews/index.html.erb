@@ -3,7 +3,7 @@
 
   <div>
     <%= form_with url: reviews_path, local: :true, method: :get do |f| %>
-      <%= f.text_field :looking_for, placeholder: 'Review Title...' %>
+      <%= f.text_field :looking_for, placeholder: 'Review_Title or User_Name' %>
       <%= f.select :range, options_for_select([["タイトル"], ["投稿者"]]) %>
       <%= f.submit '検索' %>
     <% end %>
@@ -11,7 +11,7 @@
   
   <div>
     <% if params[:looking_for].present? %>
-      <%= params[:looking_for] + "　の" +  params[:range] %>の検索結果
+      <h2><%= params[:looking_for] + "　の" +  params[:range] %>の検索結果</h2>
     <% end %>
   </div>
 

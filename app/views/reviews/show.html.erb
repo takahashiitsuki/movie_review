@@ -57,18 +57,18 @@
     <%= render 'comments/list', review: @review %>
   </div>
 
-<div class = "comment_form">
-  <% if user_signed_in?  %>
-    <div>
-  <%= form_with model: [@review, @comment],local:false do |f| %>
-      コメント<br>
-      <%= f.text_area :body %><br>
-      <%= f.submit "送信" %>
+  <div class = "comment_form">
+    <% if user_signed_in?  %>
+      <div>
+      <%= form_with model: [@review, @comment],local:false do |f| %>
+        コメント<br>
+        <%= f.text_area :body %><br>
+        <%= f.submit "送信" %>
+      <% end %>
+      </div>
     <% end %>
-</div>
-  <% end %>
-</div>
-<% if current_user == @review.user %>
+  </div>
+  <% if current_user == @review.user %>
     <%= link_to '編集', edit_review_path, class: 'btn btn-success' %>
     <%= link_to '削除', review_path,method: :delete, class: 'btn btn-danger' %>
   <% end %>

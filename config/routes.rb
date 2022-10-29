@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  
   root to: "homes#top"
   
   resources :movies, only:[:index, :show]
@@ -7,6 +6,9 @@ Rails.application.routes.draw do
   resources :reviews do
     resources :comments,only:[:create,:destroy]
   end
+  
+  get 'tags/create'
+  get 'tags/destroy'
   
   get 'user' => "users#show"
   get 'user/edit' => "users#edit"

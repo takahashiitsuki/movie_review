@@ -1,6 +1,7 @@
 class Review < ApplicationRecord
    belongs_to :user
    has_many :comments,dependent: :destroy
+   has_many :review_tags,dependent: :destroy
    
    with_options presence: true, on: :publicize do
       validates :title

@@ -12,7 +12,7 @@
       </td>
       <td>
       <% if comment.user == current_user %>
-        <%= link_to "Destroy", review_comment_path(review.comments,comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger",remote: true %>
+        <%= link_to "Destroy", review_comment_path(review,comment), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger",remote: true %>
       <% end %>
       </td>
     </tr>

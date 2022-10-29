@@ -3,7 +3,8 @@
     <div>
         <%= form_with url: movies_path, local: true, method: :get do |f| %>
         <%= f.text_field :looking_for, placeholder: 'Movie Title...' %>
-        <!--%= f.select :genre_id, options_from_collection_for_select(@genres['table'], ['id'], ['name']) %-->
+        <%#= f.select :genre_id, options_for_select(@genres, :id, :name) %>
+            
         <%= f.submit '検索' %>
         <% end %>
     </div>

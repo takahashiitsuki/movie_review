@@ -38,6 +38,20 @@
     </tr>
     <tr>
       <td>
+        タグ
+      </td>
+      <td>
+        <div class = "tag_list">
+          <%= render 'tags/list', tags: @tags %>
+        </div>
+        <% form_with model: [@tag, @review_tag],local: false do |f| %>
+          <%= f.text_field :name %>
+          <%= f.submit "タグ追加" %>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td>
         <%= f.label :star,'評価 '%>
       </td>
       <td>
