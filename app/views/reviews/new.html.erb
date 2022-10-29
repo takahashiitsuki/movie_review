@@ -44,7 +44,7 @@
         <div class = "tag_list">
           <%= render 'tags/list', tags: @tags %>
         </div>
-        <% form_with model: [@tag, @review_tag],local: false do |f| %>
+        <% form_with model: [@tag, @review],local: false do |f| %>
           <%= f.text_field :name %>
           <%= f.submit "タグ追加" %>
         <% end %>

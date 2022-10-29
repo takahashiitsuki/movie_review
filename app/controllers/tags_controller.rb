@@ -1,9 +1,10 @@
 class TagsController < ApplicationController
   def create
+    @review = Review.find(params(:review_id))
     unless Tag.find_by(name: params(:name))
-      @review_tag = Review_tag.new
       @tag = Tag.new(tag_params)
-      
+      @review_tag = @tag.Review_tag.new(params(:review_id))
+      @tags = Review(params(:review_id)).review_tag.all
     end
   end
 

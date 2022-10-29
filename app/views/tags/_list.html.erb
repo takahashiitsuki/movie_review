@@ -1,0 +1,5 @@
+<% if @tags.present? %>
+  <% tags.each do |tag| %>
+    <%= "　:" + tag.tag_name %>
+  <% end %>
+<% end %>
