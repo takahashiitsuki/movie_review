@@ -1,9 +1,4 @@
-class MoviesController < ApplicationController
-
-  def search
-
-  end
-
+class Admin::MoviesController < ApplicationController
   def index
     if params[:looking_for].present?
       @movie = JSON.parse((Tmdb::Search.movie(params[:looking_for])).to_json)
@@ -23,10 +18,4 @@ class MoviesController < ApplicationController
     @providers = JSON.parse(response.body)
     @reviews = Review.where(movie_id: (params[:id]))
   end
-
-  private
-  def movie_params
-    params.require(:movie).permit(:id)
-  end
-
 end

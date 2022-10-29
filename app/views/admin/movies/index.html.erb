@@ -21,7 +21,25 @@
         <h2>本日の世界のトレンド</h2>
     <% end %>
      =====================
-    <div>
-        <%= render 'movies/list', movie: @movie %>
+  <% i = 0 %>
+  <div class="card-wrapper">
+    <% while i < movie['table']['results'].count %>
+    <div class="card">
+      <div class="card-upperinfo">
+        <%if movie['table']['results'][i]['table']['title'].present?%>
+          <h3><%= link_to movie['table']['results'][i]['table']['title'],movie_path(movie['table']['results'][i]['table']['id']) %></h3>
+        <%end%>
+        <% if movie['table']['results'][i]['table']['release_date'].present? %>
+          <p class="release-date"><%= movie['table']['results'][i]['table']['release_date'] %></p>
+        <%end%>
+      </div>
+      <div class = "col-lg-3 mx-auto">
+        <% if movie['table']['results'][i]['table']['poster_path'].present? %>
+          <p><%= image_tag 'https://image.tmdb.org/t/p/w1280' + movie['table']['results'][i]['table']['poster_path'],class: "card-img" %></p>
+        <%end%>
+      </div>
     </div>
+    <% i += 1%>
+    <%end%>
+  </div>
 </div>

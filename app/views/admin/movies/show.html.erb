@@ -10,10 +10,9 @@
     <% end %><br>
     ジャンル
     <% @movie['table']['genres'].each do |genre| %>
-      <%= link_to ":" + genre["table"]["name"], movies_path(genre_id: genre['table']['id']) %>
+      <%= link_to ":" + genre["table"]["name"], admin_movies_path(genre_id: genre['table']['id']) %>
     <% end %>
     <br>
-    <%= link_to "レビューを投稿する", new_review_path(movie_id: @movie['table']['id']),class: "btn btn-outline-dark mx-1" %><br>
   </div>
   <div class="col-lg-3 mx-auto">
     <p><%= image_tag 'https://image.tmdb.org/t/p/w1280' + @movie['table']['poster_path'],class: "card-img" %></p>

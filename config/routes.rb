@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  namespace :admin do
+    get 'movies/index'
+    get 'movies/show'
+  end
   root to: "homes#top"
   
   resources :movies, only:[:index, :show]
@@ -18,6 +22,7 @@ Rails.application.routes.draw do
   
   namespace :admin do
   
+    resources :movies, only: [:index, :show]
     resources :users, only: [:index, :show, :edit, :update]
     resources :reviews, only: [:index, :show, :destroy]
   

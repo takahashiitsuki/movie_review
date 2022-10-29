@@ -18,6 +18,11 @@ class Admin::ReviewsController < ApplicationController
     else
       @reviews = Review.all
     end
+    if params[:is_draft] == "公開"
+      @reviews = @reviews.where(is_draft: false)
+    elsif params[:is_draft] == "下書き"
+      @reviews = @reviews.where(is_draft: true)
+    end
   end
   
   def destroy

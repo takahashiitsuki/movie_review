@@ -1,4 +1,4 @@
-<div class="container row mt-5">
+<div class="container row mt-5 mx-auto">
     <div class="col-2 ml-3 mt-2">
         <h5>マイページ</h5>
     </div>
@@ -9,7 +9,7 @@
     </div>
 </div>
 
-<div class="col-7 ml-3">
+<div class="col-7 ml-3 mx-auto">
     <table class="table table-bordered">
         <tr>
             <td class="secondary">名前</td>
@@ -34,14 +34,14 @@
           ステータス
         </th>
       </thead>
-      <% @reviews.each do |review| %>
+      <% @review.each do |review| %>
         <tr>
             <% movieinfo = JSON.parse((Tmdb::Movie.detail(review.movie_id).to_json)) %>
             <td>
-            <%= link_to review.title, review_path(review.id) %>
+              <%= link_to review.title, review_path(review.id) %>
             </td>
             <td>
-            <%= link_to movieinfo['table']['title'],movie_path(review.movie_id) %>
+              <%= link_to movieinfo['table']['title'],movie_path(review.movie_id) %>
             </td>
             <td>
               <% if review.is_draft == true %>

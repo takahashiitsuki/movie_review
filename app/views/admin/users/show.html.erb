@@ -52,12 +52,15 @@
       <td></td>
       <td>
         <% if @user.is_deleted == false %>
-        <%= link_to "退会",admin_user_path(@user.id), method: :patch, class: "btn btn-danger btn-lg" %>
+          <%= link_to "退会",admin_user_path(@user.id), method: :patch, class: "btn btn-danger btn-lg" %>
         <% else %>
-        <%= link_to "有効",admin_user_path(@user.id), method: :patch,class: "btn btn-success btn-lg" %>
+          <%= link_to "有効",admin_user_path(@user.id), method: :patch,class: "btn btn-success btn-lg" %>
         <% end %>
       </td>
     </tr>
     </tbody>
   </table>
+  <div>
+    <%= render 'reviews/list' review: @review %>
+  </div>
 </div>

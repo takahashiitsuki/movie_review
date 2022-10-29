@@ -52,6 +52,7 @@
   </table>
   レビュー内容<br>
   <%= @review.body %>
+  コメント<br>
 
   <div class = "comment_list">
     <%= render 'comments/list', review: @review %>
@@ -60,8 +61,8 @@
   <div class = "comment_form">
     <% if user_signed_in?  %>
       <div>
-      <%= form_with model: [@review, @comment],local:false do |f| %>
-        コメント<br>
+      <% form_with model: [@review, @comment],local:false do |f| %>
+        
         <%= f.text_area :body %><br>
         <%= f.submit "送信" %>
       <% end %>
