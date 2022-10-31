@@ -10,67 +10,8 @@
     <% end %>
   </div>
 
-<table class="table">
-  <thead>
-    <th>
-      レビューID
-    </th>
-    <th>
-      レビュータイトル
-    </th>
-    <th>
-      投稿者
-    </th>
-    <th>
-      映画タイトル
-    </th>
-    <th>
-      評価
-    </th>
-    <th>
-      ステータス
-    </th>
-  </thead>
-  <% @reviews.each do |review| %>
-    <% unless (review.is_draft == true) && (review.user != current_user) %>
-      <tr>
-        <% movie = JSON.parse((Tmdb::Movie.detail(review.movie_id).to_json)) %>
-        <td>
-          <%= link_to review.id, admin_review_path(review.id) %>
-        </td>
-        <td>
-          <%= link_to review.title, admin_review_path(review.id) %>
-        </td>
-        <td>
-          <%= link_to review.user.name, admin_reviews_path(looking_for: review.user.name, range: "投稿者"), data: {:looking_for => review.user.name} %>
-        </td>
-        <td>
-          <%= link_to movie['table']['title'],movie_path(review.movie_id) %>
-        </td>
-        <td>
-          <div id="star-rate<%= review.id%>"></div>
-          <script>
-            $('#star-rate<%= review.id%>').empty();
-            $('#star-rate<%= review.id%>').raty({
-              size      : 36,
-              starOff   : '<%= asset_path('star-off.png') %>',
-              starOn    : '<%= asset_path('star-on.png') %>',
-              half      : false,
-              readOnly: true,
-              score: <%= review.star %>,
-            });
-          </script>
-        </td>
-        <td>
-          <% if review.is_draft == true %>
-            下書き
-          <% else %>
-            公開
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  <% end %>
-</table>
+  <div class = "review_list">
+    <%= render 'reviews/list', reviews: @reviews %>
+  </div>
 
 </div>

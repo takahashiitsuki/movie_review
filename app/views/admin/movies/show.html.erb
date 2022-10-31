@@ -2,12 +2,12 @@
   <div class="col-lg-7 mx-auto">
     映画情報
     <h3><%= @movie['table']['title'] %></h3>
-    <% if @providers['results']['JP'].present? %>
+    <% if @providers['results']['JP']['flatrate'].present? %>
       視聴可能サービス
         <% @providers['results']['JP']['flatrate'].each do |provider| %>
           <%= image_tag 'https://www.themoviedb.org/t/p/w45'+ provider['logo_path'], title: provider['provider_name'] %>
-        <% end %>
-    <% end %><br>
+        <% end %><br>
+    <% end %>
     ジャンル
     <% @movie['table']['genres'].each do |genre| %>
       <%= link_to ":" + genre["table"]["name"], admin_movies_path(genre_id: genre['table']['id']) %>

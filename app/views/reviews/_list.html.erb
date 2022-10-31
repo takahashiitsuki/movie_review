@@ -24,16 +24,33 @@
       <tr>
         <% movie = JSON.parse((Tmdb::Movie.detail(review.movie_id).to_json)) %>
         <td>
-          <%= link_to review.id, review_path(review.id) %>
+          <% if admin_signed_in? %>
+            <%= link_to review.id, admin_review_path(review.id) %>
+          <% else %>
+            <%= link_to review.id, review_path(review.id) %>
+          <% end %>
         </td>
         <td>
-          <%= link_to review.title, review_path(review.id) %>
+          <% if admin_signed_in? %>
+            <%= link_to review.title, admin_review_path(review.id) %>
+          <% else %>
+            <%= link_to review.title, review_path(review.id) %>
+          <% end %>
         </td>
         <td>
-          <%= link_to review.user.name, reviews_path(looking_for: review.user.name, range: "投稿者"), data: {:looking_for => review.user.name} %>
+          <% if admin_signed_in? %>
+            <%= link_to review.user.name, admin_reviews_path(looking_for: review.user.name, range: "投稿者"), data: {:looking_for => review.user.name} %>
+          <% else %>
+            <%= link_to review.user.name, reviews_path(looking_for: review.user.name, range: "投稿者"), data: {:looking_for => review.user.name} %>
+          <% end %>
         </td>
         <td>
-          <%= link_to movie['table']['title'],movie_path(review.movie_id) %>
+          
+          <% if admin_signed_in? %>
+            <%= link_to movie['table']['title'],admin_movie_path(review.movie_id) %>
+          <% else %>
+            <%= link_to movie['table']['title'],movie_path(review.movie_id) %>
+          <% end %>
         </td>
         <td>
           <div id="star-rate<%= review.id%>"></div>
