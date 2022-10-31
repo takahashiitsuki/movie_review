@@ -34,7 +34,7 @@
           ステータス
         </th>
       </thead>
-      <% @review.each do |review| %>
+      <% @reviews.each do |review| %>
         <tr>
             <% movieinfo = JSON.parse((Tmdb::Movie.detail(review.movie_id).to_json)) %>
             <td>
