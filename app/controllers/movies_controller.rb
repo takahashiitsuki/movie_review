@@ -1,12 +1,10 @@
 class MoviesController < ApplicationController
-
-  def search
-
-  end
-
   def index
     if params[:looking_for].present?
       @movie = JSON.parse((Tmdb::Search.movie(params[:looking_for])).to_json)
+      if params[:genre_id].present?
+        @genre = params[:genre_id].to_i
+      end
     elsif params[:genre_id].present?
       @movie = JSON.parse((Tmdb::Genre.movies(params[:genre_id])).to_json)
     else

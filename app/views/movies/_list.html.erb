@@ -1,6 +1,7 @@
 <% i = 0 %>
 <div class="card-wrapper">
   <% while i < movie['table']['results'].count %>
+  <% if @genre.nil? || movie['table']['results'][i]['table']['genre_ids'].include?(@genre) %>
     <div class="card">
       <div class="card-upperinfo">
         <% if movie['table']['results'][i]['table']['title'].present? %>
@@ -25,6 +26,7 @@
         <%end%>
       </div>
     </div>
+    <% end %>
     <% i += 1%>
   <%end%>
 </div>

@@ -12,8 +12,9 @@
         <h2>
         <% if params[:looking_for].present? %>
             <%= params[:looking_for] + "　" %>
-        <% else %>
-            <%= "ジャンル"  %>
+        <% end %>
+        <% params[:genre_id].present? %>
+            <%= "ジャンル：" + @genres.find{|arr| arr[1].to_s == params[:genre_id] }[0]  %>
         <% end %>
         　の検索結果</h2>
     <% else %>
