@@ -8,8 +8,13 @@ Rails.application.routes.draw do
   resources :movies, only:[:index, :show]
   
   resources :reviews do
-    resources :comments,only:[:create,:destroy]
+    resources :comments, only:[:create, :destroy]
+    
   end
+  
+  resources :tags, only:[:create]
+  
+  resources :review_tags, only:[:destroy]
   
   get 'tags/create'
   get 'tags/destroy'

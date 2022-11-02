@@ -45,7 +45,20 @@
     <%= f.hidden_field :star, id: :review_star, :value => 'score' %>
     </div>
       </td>
-
+    </tr>
+    <tr>
+      <td>
+        タグ
+      </td>
+      <td>
+        <div class = "tags_list">
+          <%= render 'tags/list' %>
+        </div><br>
+        <%= form_with url: tags_path, model: [@review, @tag], local: false do |t| %>
+          <%= t.text_field :name %>
+          <% t.submit '追加' %>
+        <% end %>
+      </td>
     </tr>
   </table>
   <h4>本文</h4>

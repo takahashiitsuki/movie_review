@@ -5,6 +5,7 @@ class ReviewsController < ApplicationController
     @user = current_user
     @movie = JSON.parse((Tmdb::Movie.detail(params[:movie_id])).to_json)
     @review = Review.new
+    @tag = Tag.new
   end
 
   def create
