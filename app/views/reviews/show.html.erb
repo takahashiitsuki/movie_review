@@ -59,9 +59,9 @@
   </div>
 
   <div class = "comment_form">
-    <% if user_signed_in?  %>
+    <% if user_signed_in? %>
       <div>
-      <% form_with model: [@review, @comment],local:false do |f| %>
+      <%= form_with model: [@review, @comment],local:false do |f| %>
         
         <%= f.text_area :body %><br>
         <%= f.submit "送信" %>
