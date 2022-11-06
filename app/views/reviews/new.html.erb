@@ -1,6 +1,6 @@
 <div class="container">
   レビュー投稿
-  <%= form_with model: @review do |f| %>
+
   <table class="table">
     <tr>
       <td>
@@ -30,6 +30,21 @@
     </tr>
     <tr>
       <td>
+        タグ
+      </td>
+      <td>
+        <div class = "tags_list">
+          <%= render 'tags/list', tags: @tags %>
+        </div><br>
+        <%= form_with url: tags_path, model: @tag,  local: false do |t| %>
+          <%= t.text_field :name %>
+          <%= t.submit '追加' %>
+        <% end %>
+      </td>
+    </tr>
+    <%= form_with model: @review do |f| %>
+    <tr>
+      <td>
         レビュータイトル
       </td>
       <td>
@@ -46,20 +61,7 @@
     </div>
       </td>
     </tr>
-    <tr>
-      <td>
-        タグ
-      </td>
-      <td>
-        <div class = "tags_list">
-          <%= render 'tags/list' %>
-        </div><br>
-        <%= form_with url: tags_path, model: [@review, @tag], local: false do |t| %>
-          <%= t.text_field :name %>
-          <% t.submit '追加' %>
-        <% end %>
-      </td>
-    </tr>
+
   </table>
   <h4>本文</h4>
     <%= f.text_area :body %><br>

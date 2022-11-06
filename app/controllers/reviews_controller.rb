@@ -6,11 +6,16 @@ class ReviewsController < ApplicationController
     @movie = JSON.parse((Tmdb::Movie.detail(params[:movie_id])).to_json)
     @review = Review.new
     @tag = Tag.new
+    @tags = ReviewTag.where(review_id: nil)
   end
 
   def create
     @review = Review.new(review_params)
     @review.user_id = current_user.id
+    @review_tags = ReviewTags.where(review_id: nil)
+    @review_tags.each do |review_tag|
+      review_tag.review_id = @review.id
+    end
     if params[:post]
       if @review.save(context: :publicize)
         redirect_to review_path(@review.id)

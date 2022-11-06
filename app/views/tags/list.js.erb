@@ -1,2 +1,2 @@
-$("#tag_list").html("<%= j(render 'tags/list') %>");
+$("#tag_list").html("<%= j(render 'tags/list', tags: @tags) %>");
 $("#tag_form").val('');
