@@ -2,10 +2,6 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_guest_user, only: [:edit]
 
-  def index
-    @users = User.all
-  end
-
   def show
     @user = current_user
     @reviews = @user.reviews

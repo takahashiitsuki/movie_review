@@ -36,6 +36,7 @@ class ReviewsController < ApplicationController
   end
 
   def index
+    #検索を未入力の状態だとすべて表示される
     if params[:looking_for].present?
       if params[:range] == "タイトル"
         @reviews = Review.where("title LIKE ?", "%#{params[:looking_for]}%")
