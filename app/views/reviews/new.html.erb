@@ -36,10 +36,11 @@
         <div class = "tags_list">
           <%= render 'tags/list', tags: @tags %>
         </div><br>
-        <%= form_with url: tags_path, model: @tag,  local: false do |t| %>
+        <%= form_with url: tags_path, model: @tag, local: false do |t| %>
           <%= t.text_field :name %>
           <%= t.submit '追加' %>
         <% end %>
+
       </td>
     </tr>
     <%= form_with model: @review do |f| %>

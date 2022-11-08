@@ -6,6 +6,7 @@ class ReviewsController < ApplicationController
     @movie = JSON.parse((Tmdb::Movie.detail(params[:movie_id])).to_json)
     @review = Review.new
     @tag = Tag.new
+    @review_tag = ReviewTag.new
     @tags = ReviewTag.where(review_id: nil)
   end
 

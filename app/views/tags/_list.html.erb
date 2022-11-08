@@ -1,5 +1,5 @@
 <% if tags.present? %>
   <% tags.each do |tag| %>
-    <%= "　:" + tag.tag.name %>
+    <%= "　:" + Tag.find(tag.tag_id).name %>
   <% end %>
 <% end %>
