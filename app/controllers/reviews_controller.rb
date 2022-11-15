@@ -2,7 +2,6 @@ class ReviewsController < ApplicationController
   before_action :authenticate_user!,only: [:new]
 
   def new
-    @user = current_user
     @movie = JSON.parse((Tmdb::Movie.detail(params[:movie_id])).to_json)
     @review = Review.new
   end
