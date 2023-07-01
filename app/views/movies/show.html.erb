@@ -20,7 +20,7 @@
   <div class="col-lg-3 mx-auto">
     <p><%= image_tag 'https://image.tmdb.org/t/p/w1280' + @movie['table']['poster_path'],class: "card-img" %></p>
   </div>
-  <div>
+  <div class="col-lg-7 mx-auto">
     <%= render 'reviews/list', reviews: @reviews %>
   </div>
 </div>
