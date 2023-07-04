@@ -33,6 +33,9 @@
         <th>
           ステータス
         </th>
+        <th>
+      
+        </th>
       </thead>
       <% @reviews.each do |review| %>
         <tr>
@@ -50,6 +53,9 @@
                 公開
               <% end %>
             </td>
+            <th>
+              <%= link_to "編集", edit_review_path(review.id),class: "btn btn-outline-dark mx-1" %>
+            </th>
         </tr>
       <% end %>
     </table>
