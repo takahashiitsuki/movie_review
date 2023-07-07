@@ -53,9 +53,11 @@
                 公開
               <% end %>
             </td>
-            <th>
-              <%= link_to "編集", edit_review_path(review.id),class: "btn btn-outline-dark mx-1" %>
-            </th>
+            <% if review.user_id == current_user.id %>
+              <td>
+                <%= link_to "編集", edit_review_path(review.id),class: "btn btn-outline-dark mx-1" %>
+              </td>
+            <% end %>
         </tr>
       <% end %>
     </table>
