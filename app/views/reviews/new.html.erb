@@ -1,6 +1,11 @@
 <div class="container">
+  <% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
   レビュー投稿
-  <%= form_with model: @review do |f| %>
+  <%= form_with model: ReviewForm.new, url: reviews_path do |f| %>
   <table class="table">
     <tr>
       <td>
@@ -46,6 +51,14 @@
     </div>
       </td>
 
+    </tr>
+    <tr>
+      <td>
+        タグ(","で区切ると複数タグ登録できます)
+      </td>
+      <td>
+        <%= f.text_field :tags %>
+      </td>
     </tr>
   </table>
   <h4>本文</h4>

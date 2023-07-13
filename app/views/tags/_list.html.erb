@@ -1,0 +1,6 @@
+<% if @tags.present? %>
+  <% tags.each do |tag| %>
+    <%= "　:" + tag.tag_name %>
+    <%= "削除" class: "btn" %>
+  <% end %>
+<% end %>

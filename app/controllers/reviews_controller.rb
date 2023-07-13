@@ -7,21 +7,27 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = Review.new(review_params)
+    @review = ReviewForm.new(review_params)
     @review.user_id = current_user.id
+    @tags = params[:review]&.fetch(:tags, '').split(',')
     if params[:post]
-      if @review.save(context: :publicize)
+      if @review.save
+        @tags.each do |new_tag|
+          tag = Tag.find_or_create_by(name: new_tag)
+          Review_tag.create(review: @review_form, tag: tag)
+        end
         redirect_to review_path(@review.id)
       else
-        @movie = JSON.parse((Tmdb::Movie.detail(@review.movie_id)).to_json)
-        render :new, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        @movie = JSON.parse((Tmdb::Movie.detail(params[:review_form][:movie_id])).to_json)
+        flash.now[:alert] = "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        render :new
       end
     # 下書きボタンを押下した場合
     else
       if @review.update(is_draft: true)
         redirect_to review_path(@review.id)
       else
-        @movie = JSON.parse((Tmdb::Movie.detail(@review.movie_id)).to_json)
+        @movie = JSON.parse((Tmdb::Movie.detail(params.movie_id)).to_json)
         render :new, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
       end
     end
@@ -101,7 +107,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:title, :star, :body, :movie_id)
+    params.require(:review).permit(:title, :star, :body, :movie_id, :tags)
   end
 
 end
