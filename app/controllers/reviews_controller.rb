@@ -7,9 +7,12 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = ReviewForm.new(review_params)
+    p params
+    @review = ReviewForm.new(params[:review_form])
     @review.user_id = current_user.id
     @tags = params[:review]&.fetch(:tags, '').split(',')
+    p params
+    p @review
     if params[:post]
       if @review.save
         @tags.each do |new_tag|
@@ -107,7 +110,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review).permit(:title, :star, :body, :movie_id, :tags)
+    params.require(:review_form).permit(:title, :star, :body, :movie_id, :tags)
   end
 
 end

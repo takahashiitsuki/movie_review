@@ -15,8 +15,8 @@ class ReviewForm
   
   def save
       # レビューの保存ロジック
-      review = Review.new(title: @review.title, body: @review.body, star: @review.star, movie_id: @review.movie_id, user_id: @review.user_id)
-      review.save
+      new_review = Review.new(title: review.title, body: review.body, star: review.star, movie_id: review.movie_id, user_id: review.user_id)
+      new_review.save
   end
 
 
