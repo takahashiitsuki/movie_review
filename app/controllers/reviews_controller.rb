@@ -10,7 +10,7 @@ class ReviewsController < ApplicationController
     p params
     @review = ReviewForm.new(params[:review_form])
     @review.user_id = current_user.id
-    @tags = params[:review]&.fetch(:tags, '').split(',')
+    @tags = params[:review_form]&.fetch(:tags, '').split(',')
     p params
     p @review
     if params[:post]
