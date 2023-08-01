@@ -8,9 +8,12 @@ class ReviewsController < ApplicationController
 
   def create
     p params
-    @review = ReviewForm.new(params[:review_form])
-    @review.user_id = current_user.id
     @tags = params[:review_form][:tags]&.split(',')
+    p @tags
+    review_form_params = params[:review_form].except(:tags)
+    @review = Review.new(review_params)
+    @review.user_id = current_user.id
+    
     
     p @review
     if params[:post]
@@ -110,7 +113,7 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    params.require(:review_form).permit(:title, :star, :body, :movie_id, :tags)
+    params.require(:review_form).permit(:title, :star, :body, :movie_id)
   end
 
 end
