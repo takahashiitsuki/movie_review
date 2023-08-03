@@ -8,13 +8,17 @@ class ReviewsController < ApplicationController
 
   def create
     p params
+    p params[:review_form]
     @tags = params[:review_form][:tags]&.split(',')
     p @tags
-    review_form_params = params[:review_form].except(:tags)
-    @review = Review.new(review_params)
+    p params.except[:tags]
+    p params[:review][:star]
+    review_form_params = params.except[:tags]
+    p review_form_params
+    @review = Review.new(review_form_params)
     @review.user_id = current_user.id
-    
-    
+    @review.star = params[:review][:star]
+
     p @review
     if params[:post]
       if @review.save
@@ -37,7 +41,7 @@ class ReviewsController < ApplicationController
         render :new, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
       end
     end
-    
+
   end
 
   def show
@@ -59,7 +63,7 @@ class ReviewsController < ApplicationController
       @reviews = Review.all
     end
   end
-  
+
   def edit
     @review = Review.find(params[:id])
     @movie = JSON.parse((Tmdb::Movie.detail(@review.movie_id)).to_json)
@@ -78,7 +82,7 @@ class ReviewsController < ApplicationController
     review.destroy
     redirect_to reviews_path
   end
-  
+
   def update
     @review = Review.find(params[:id])
     # ①下書きレシピの更新（公開）の場合
