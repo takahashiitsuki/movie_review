@@ -12,7 +12,10 @@ class ReviewsController < ApplicationController
     review_form_params = params[:review_form]
     p params[:review_form].except(:tags)
     p review_form_params
-    @review = Review.new(review_form_params)
+    @review = Review.new
+    @review.title = params[:review_form][:title]
+    @review.body = params[:review_form][:body]
+    @review.movie_id = params[:review_form][:movie_id]
     @review.user_id = current_user.id
     @review.star = params[:review][:star].to_i
 
@@ -21,7 +24,7 @@ class ReviewsController < ApplicationController
       if @review.save
         @tags.each do |new_tag|
           tag = Tag.find_or_create_by(name: new_tag)
-          Review_tag.create(review: @review_form, tag: tag)
+          ReviewTag.create(review: @review, tag: tag)
         end
         redirect_to review_path(@review.id)
       else
