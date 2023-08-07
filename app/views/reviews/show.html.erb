@@ -43,6 +43,16 @@
     </script>
       </td>
     </tr>
+    <tr>
+      <td>
+        タグ
+      </td>
+      <td>
+        <% @reviewtags.each do |reviewtag| %>
+          <%= ":" + reviewtag.tag.name + "　" %>
+        <% end %>
+      </td>
+    </tr>
     <% if @review.is_draft == true %>
       <tr>
         <td>ステータス</td>
@@ -62,7 +72,7 @@
     <% if user_signed_in? %>
       <div>
       <%= form_with model: [@review, @comment],local:false do |f| %>
-        
+
         <%= f.text_area :body %><br>
         <%= f.submit "送信" %>
       <% end %>

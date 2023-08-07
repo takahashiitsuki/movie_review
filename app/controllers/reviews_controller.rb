@@ -48,6 +48,7 @@ class ReviewsController < ApplicationController
     @review = Review.find(params[:id])
     @movie = JSON.parse((Tmdb::Movie.detail(@review.movie_id)).to_json)
     @comment = Comment.new
+    @reviewtags = ReviewTag.where(review_id: params[:id])
   end
 
   def index
