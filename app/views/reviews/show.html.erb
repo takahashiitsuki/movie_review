@@ -49,7 +49,7 @@
       </td>
       <td>
         <% @reviewtags.each do |reviewtag| %>
-          <%= ":" + reviewtag.tag.name + "　" %>
+          <%= link_to ":" + reviewtag.tag.name + "　",reviews_path(range: "タグ", looking_for: reviewtag.tag.name) %>
         <% end %>
       </td>
     </tr>

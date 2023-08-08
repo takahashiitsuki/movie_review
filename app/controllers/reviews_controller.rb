@@ -56,6 +56,9 @@ class ReviewsController < ApplicationController
     if params[:looking_for].present?
       if params[:range] == "タイトル"
         @reviews = Review.where("title LIKE ?", "%#{params[:looking_for]}%")
+      elsif params[:range] == "タグ"
+        @tags = Tag.where("name LIKE ?", "%#{params[:looking_for]}%")
+        @reviews = Review.joins(:tags).where(tags: { id: @tags.pluck(:id) })
       else
         @users = User.where("name LIKE ?", "%#{params[:looking_for]}%")
         @reviews = Review.where(user_id: @users.ids)
