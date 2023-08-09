@@ -1,4 +1,4 @@
-class Review_tagsController < ApplicationController
+class ReviewtagsController < ApplicationController
   def create
     @review = Review.find(params[:review_id])
     @review_tag = @review.review_tags.new(tag_params)
