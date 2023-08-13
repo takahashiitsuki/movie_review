@@ -37,6 +37,12 @@
         </div>
       </td>
     </tr>
+    <tr>
+      <td>タグ(","で区切ると複数タグ登録できます)</td>
+      <td>
+        <%= f.text_field :tags, value: @tag_list %>
+      </td>
+    </tr>
     <% if @review.is_draft == true %>
       <tr>
         <td>ステータス</td>

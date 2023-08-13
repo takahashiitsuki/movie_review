@@ -1,9 +1,9 @@
 <div class="container">
   <% if flash[:alert] %>
-  <div class="alert alert-danger">
-    <%= flash[:alert] %>
-  </div>
-<% end %>
+    <div class="alert alert-danger">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
   レビュー投稿
   <%= form_with model: ReviewForm.new, url: reviews_path do |f| %>
   <table class="table">

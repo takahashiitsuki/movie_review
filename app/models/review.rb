@@ -9,7 +9,6 @@ class Review < ApplicationRecord
    with_options presence: true, on: :publicize do
       validates :title
       validates :body
-      validates :star
    end
 
 #   def self.looks(search, word)

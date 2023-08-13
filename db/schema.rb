@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_10_28_232710) do
+ActiveRecord::Schema.define(version: 2023_08_13_014702) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -38,15 +38,15 @@ ActiveRecord::Schema.define(version: 2022_10_28_232710) do
   end
 
   create_table "review_tags", force: :cascade do |t|
-    t.integer "review_id", null: false
+    t.integer "review_id"
     t.integer "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.string "title", null: false
-    t.string "body", null: false
+    t.string "title"
+    t.string "body"
     t.integer "star", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false

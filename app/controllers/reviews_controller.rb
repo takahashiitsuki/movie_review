@@ -7,21 +7,18 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    p params
     @tags = params[:review_form][:tags]&.split(',')
-    review_form_params = params[:review_form]
-    p params[:review_form].except(:tags)
-    p review_form_params
     @review = Review.new
-    @review.title = params[:review_form][:title]
-    @review.body = params[:review_form][:body]
+    title = params[:review_form][:title].strip
+    @review.title = title unless title.blank?
+    body = params[:review_form][:body].strip
+    @review.body = body unless title.blank?
     @review.movie_id = params[:review_form][:movie_id]
     @review.user_id = current_user.id
     @review.star = params[:review][:star].to_i
-
     p @review
     if params[:post]
-      if @review.save
+      if @review.save(context: :publicize)
         @tags.each do |new_tag|
           tag = Tag.find_or_create_by(name: new_tag)
           ReviewTag.create(review: @review, tag: tag)
@@ -71,6 +68,7 @@ class ReviewsController < ApplicationController
   def edit
     @review = Review.find(params[:id])
     @movie = JSON.parse((Tmdb::Movie.detail(@review.movie_id)).to_json)
+    @tag_list = @review.review_tags.joins(:tag).pluck('tags.name').join(',')
   end
 
   def search
