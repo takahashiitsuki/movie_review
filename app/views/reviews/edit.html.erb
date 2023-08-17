@@ -1,6 +1,6 @@
 <div class="container">
   レビュー編集
-  <%= form_with model: @review, method: "patch" do |f| %>
+  <%= form_with model: @review_form, url: review_path(@review), method: "patch" do |f| %>
   <table class="table">
     <tr>
       <td>
@@ -40,7 +40,7 @@
     <tr>
       <td>タグ(","で区切ると複数タグ登録できます)</td>
       <td>
-        <%= f.text_field :tags, value: @tag_list %>
+        <%= f.text_field :tags %>
       </td>
     </tr>
     <% if @review.is_draft == true %>
