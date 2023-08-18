@@ -43,6 +43,16 @@
     </script>
       </td>
     </tr>
+    <tr>
+      <td>
+        タグ
+      </td>
+      <td>
+        <% @reviewtags.each do |reviewtag| %>
+          <%= link_to ":" + reviewtag.tag.name + "　",reviews_path(range: "タグ", looking_for: reviewtag.tag.name) %>
+        <% end %>
+      </td>
+    </tr>
   </table>
   レビュー内容<br>
   <%= @review.body %><br>
