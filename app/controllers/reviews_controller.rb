@@ -35,7 +35,8 @@ class ReviewsController < ApplicationController
         redirect_to review_path(@review.id)
       else
         @movie = JSON.parse((Tmdb::Movie.detail(params.movie_id)).to_json)
-        render :new, alert: "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        flash.now[:alert] = "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        render :new
       end
     end
 
@@ -92,14 +93,7 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    @tags = params[:review_form][:tags]&.split(',')
     @review = Review.find(params[:id])
-    ReviewTag.where(review_id: @review.id).delete_all
-    @tags.each do |new_tag|
-      tag = Tag.find_or_create_by(name: new_tag)
-      ReviewTag.create(review: @review, tag: tag)
-    end
-
     update_params = review_params.except(:tags)
     # ①下書きレシピの更新（公開）の場合
     if params[:publicize_draft]
@@ -107,25 +101,50 @@ class ReviewsController < ApplicationController
       # updateメソッドにはcontextが使用できないため、公開処理にはattributesとsaveメソッドを使用する
       @review.attributes = update_params.merge(is_draft: false)
       if @review.save(context: :publicize)
+        @tags = params[:review_form][:tags]&.split(',')
+        ReviewTag.where(review_id: @review.id).delete_all
+        @tags.each do |new_tag|
+          tag = Tag.find_or_create_by(name: new_tag)
+          ReviewTag.create(review: @review, tag: tag)
+        end
         redirect_to review_path(@review.id)
       else
         @review.is_draft = true
-        render :edit, alert: "公開できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        @movie = JSON.parse((Tmdb::Movie.detail(@review.movie_id)).to_json)
+        @review_form = ReviewForm.new(
+          title: @review.title,
+          star: @review.star,
+          body: @review.body,
+          movie_id: @review.movie_id,
+          tags: @review.review_tags.joins(:tag).pluck('tags.name').join(',')
+        )
+        flash.now[:alert] = "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        render :edit
       end
     # ②公開済みレシピの更新の場合
     elsif params[:update_post]
       @review.attributes = update_params
       if @review.save(context: :publicize)
+        @tags = params[:review_form][:tags]&.split(',')
+        ReviewTag.where(review_id: @review.id).delete_all
+        @tags.each do |new_tag|
+          tag = Tag.find_or_create_by(name: new_tag)
+          ReviewTag.create(review: @review, tag: tag)
+        end
         redirect_to review_path(@review.id)
       else
-        render :edit, alert: "更新できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        @movie = JSON.parse((Tmdb::Movie.detail(@review.movie_id)).to_json)
+        flash.now[:alert] = "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        render :edit
       end
     # ③下書きレシピの更新（非公開）の場合
     else
       if @review.update(update_params)
         redirect_to review_path(@review.id)
       else
-        render :edit, alert: "更新できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        @movie = JSON.parse((Tmdb::Movie.detail(@review.movie_id)).to_json)
+        flash.now[:alert] = "登録できませんでした。お手数ですが、入力内容をご確認のうえ再度お試しください"
+        render :edit
       end
     end
   end
